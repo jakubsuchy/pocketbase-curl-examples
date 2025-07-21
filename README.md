@@ -2,6 +2,46 @@
 
 Pocketbase provides an API and SDK for its database. However, the API itself is only documented from the SDK, so I created a small collection of examples for my own documentation. Adjust accordingly
 
+# Login with password
+
+To login with password you simply POST to the users collection. The output will contain the token
+```
+curl 'https://<pocketbase url>/api/collections/users/auth-with-password' \
+  -H 'content-type: application/json' \
+  --data-raw '{"identity":"<username>","password":"<password>"}' \
+  --insecure -kv
+```
+
+Sample response:
+```
+{
+	"record": {
+		"avatar": "",
+		"collectionId": "_pb_users_auth_",
+		"collectionName": "users",
+		"created": "2025-07-16 22:55:04.240Z",
+		"email": "<email>",
+		"emailVisibility": false,
+		"id": "xabrgho2lgpfk4f",
+		"name": "<name>",
+		"updated": "2025-07-16 22:55:04.240Z",
+		"verified": false
+	},
+	"token": "eyJhbGdapc31iOsdiJ5IpsdfUzI1NibIsInRdoew5ctCyI6IkpXVloaCJ9.eyJjb2xsZaiaF8iLCJleHAiOjEasdfh3NTM3MTIalskjflkasjf1904NTMsImlkIjoieGFicmdobzJsZ3BmazRmIiwicmVmcmVzaGFibGUiOnsdfoijOiJhdXRoIn0.bHZ6kzkhnmu_Q66s2KCluoCRKdPg"
+}
+```
+
+## Get the token directly
+
+Use jq!
+
+```
+curl 'https://<pocketbase url>/api/collections/users/auth-with-password' \
+  -H 'content-type: application/json' \
+  --data-raw '{"identity":"<username>","password":"<password>"}' \
+  --insecure -kv | jq -r .token
+```
+
 
 # Create record
 
